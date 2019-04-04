@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Axios from 'axios';
+import axios from 'axios';
 import FriendsList from './components/FriendsList';
+import AddFriend from './components/AddFriend';
 
 class App extends Component {
   constructor() {
@@ -10,60 +11,67 @@ class App extends Component {
     this.state = {
       friends: [],
       name: '',
-      age: '',
+      age: 0,
       email: '',
-  };
-}
+    };
+  }
 
-componentDidMount() {
-  Axios.get('http://localhost:5000/friends')
-    .then(response => {this.setState({friends: response.data}) })
-    .catch(error => (error));
-}
+  componentDidMount() {
+    axios.get('http://localhost:5000/friends')
+      .then(response => { this.setState({ friends: response.data }) })
+      .catch(error => (error));
+  }
 
-changeHandler = event => {
-  event.persist();
-  let value = event.target.value;
+  changeHandler = event => {
+    event.persist();
+    let value = event.target.value;
 
-  this.setState(prevState => ({
-    friend: {
-      ...prevState.friend,
-      [event.target.name]: value
-    }
-  }));
-}
+    this.setState(prevState => ({
+      friend: {
+        ...prevState.friend,
+        [event.target.name]: value
+      }
+    }));
+  }
 
-newFriend = e => {
-  e.preventDefault();
-  Axios.post('http://localhost:5000/friends', {
-    name: this.state.name,
-    age: this.state.age,
-    email: this.state.email
-  })
-    .then(response => {this.setState({friends: response.data})})
-    .catch(error => console.log(error));
-  this.setState({
-    name: '',
-    age: 0,
-    email: ''
-  })
-}
+  newFriend = e => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/friends', {
+      name: this.state.name,
+      age: this.state.age,
+      email: this.state.email
+    })
+      .then(response => { this.setState({ friends: response.data }) })
+      .catch(error => console.log(error));
+    this.setState({
+      name: '',
+      age: 0,
+      email: ''
+    })
+  }
 
-render() {
-  return (
-    <div>
-      {this.state.friends.map(friend => (
-        <FriendsList
-        key={friend.id}
-        friend={friend}
-        name={friend.name}
-        age={friend.age}
-        email={friend.email}
-        />
-      ))}
-    </div>
-  )
-}
+  render() {
+    return (
+      <div>
+        <div>
+        {this.state.friends.map(friend => (
+          <FriendsList
+            key={friend.id}
+            friend={friend}
+            name={friend.name}
+            age={friend.age}
+            email={friend.email}
+          />
+        ))}
+        </div>
+          <AddFriend
+            changeHandler={this.changeHandler}
+            friend={this.state.friends}
+            newFriend={this.newFriend}
+          />
+      </div>
+    );
+  }
 }
 
 export default App;
