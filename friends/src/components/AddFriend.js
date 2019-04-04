@@ -29,6 +29,7 @@ const AddFriend = props => {
                 <button type='submit'>Submit Friend</button>
             </form>
         </div>
+
     );
 }
 
