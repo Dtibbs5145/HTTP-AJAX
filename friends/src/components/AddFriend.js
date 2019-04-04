@@ -1,8 +1,9 @@
 import React from 'react';
+import './AddFriend.css';
 
 const AddFriend = props => {
     return (
-        <div>
+        <div className='form'>
         <h3>Add A Friend!</h3>
             <form onSubmit={props.newFriend}>
                 <input

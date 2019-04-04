@@ -1,0 +1,19 @@
+.form {
+    margin-bottom: 50px;
+    text-align: center;
+    background: lightblue;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: darkblue;
+    border: 2px solid darkblue;
+    font-size: 20px;
+}
+
+button {
+    background: lightblue;
+    color: darkblue;
+    border: 1px solid darkblue;
+    margin-left: 10px;
+    border-radius: 20%;
+}
+
