@@ -1,0 +1,10 @@
+.names {
+    text-align: center;
+    background: lightblue;
+    margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: darkblue;
+    border: 2px solid darkblue;
+    font-size: 20px;
+}
